@@ -45,3 +45,7 @@ The glyph-number rule was confirmed against text drawn on screen in emulator sav
 - [zeldaret/oot](https://github.com/zeldaret/oot) — its iQue Chinese work showed how the iQue team stored text.
 
 Dòngwù Sēnlín © Nintendo / iQue. This is an unofficial project, not affiliated with either.
+
+## Licence
+
+The code and `chars.json` are under the MIT licence (see `LICENSE`). It covers this project only, not the game or its text.
