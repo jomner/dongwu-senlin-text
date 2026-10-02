@@ -16,7 +16,7 @@ It writes `script.txt`: all 11,791 messages by number, in Chinese, with the game
 
 - `extract.py` — the extractor.
 - `chars.json` — character code → character, for all 2,670 characters the script uses.
-- `low-confidence.json` — the 380 readings in `chars.json` that are less certain: kana (likely leftovers from the Japanese original), bold Latin letters and digits, and characters the font holds twice in near-identical forms.
+- `low-confidence.json` — the 378 readings in `chars.json` that are less certain: kana (likely leftovers from the Japanese original), bold Latin letters and digits, and characters the font holds twice in near-identical forms.
 - `tools/` — what the table was made with (Python 3 and Pillow):
   - `sheets.py <rom>` draws the characters `chars.json` lacks, most frequent first, as numbered sheets of the game's own glyphs.
   - `apply_sheet.py <n> <readings.txt>` stores one sheet's readings.
@@ -33,6 +33,12 @@ It writes `script.txt`: all 11,791 messages by number, in Chinese, with the game
   - `00`–`7C` — one-byte character: glyph number = the byte.
   - `80`–`FF` then a second byte — two-byte character: glyph number = `(second << 7 | (first & 0x7F)) + 128`.
 - **Font.** File 1882, from offset `0x128`: one 4-bit intensity sheet 192 pixels wide, 12×12 glyphs, 16 per row (1,152 bytes per row of glyphs), 7,056 slots. The game copies a glyph into its text cache with the routine at `0x80073E68`. The glyphs are in the game's own order, not GB2312, so the table was made by reading each glyph.
+
+## Notes on the text
+
+- About 380 messages (including the first ones, #0–4) are mostly Japanese: text the Chinese release left untranslated, likely unused or debug messages.
+- `．` mostly appears between pause codes: dots that appear one by one, the game's dramatic "…".
+- Some Chinese on screen is drawn as pictures rather than text (the title logo, signs, some menu labels), so it isn't in the script.
 
 ## How the table was made
 
