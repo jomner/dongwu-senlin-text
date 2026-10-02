@@ -1,0 +1,9 @@
+# Game data never goes in this repository
+script.txt
+glyphs-used.txt
+*.z64
+*.n64
+*.v64
+*.bin
+*.bs*
+*.bst
