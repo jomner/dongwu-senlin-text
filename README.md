@@ -16,7 +16,7 @@ It writes `script.txt`: all 11,791 messages by number, in Chinese, with the game
 
 - `extract.py` — the extractor.
 - `chars.json` — character code → character, for all 2,670 characters the script uses.
-- `low-confidence.json` — the readings in `chars.json` that are less certain: kana (likely leftovers from the Japanese original), bold Latin letters and digits, and characters the font holds twice in near-identical forms.
+- `low-confidence.json` — the 173 readings in `chars.json` that are best guesses (see below).
 - `tools/` — what the table was made with (Python 3 and Pillow):
   - `sheets.py <rom>` draws the characters `chars.json` lacks, most frequent first, as numbered sheets of the game's own glyphs.
   - `apply_sheet.py <n> <readings.txt>` stores one sheet's readings.
@@ -39,6 +39,21 @@ It writes `script.txt`: all 11,791 messages by number, in Chinese, with the game
 - About 380 messages (including the first ones, #0–4) are mostly Japanese: text the Chinese release left untranslated, likely unused or debug messages.
 - `．` mostly appears between pause codes: dots that appear one by one, the game's dramatic "…".
 - Some Chinese on screen is drawn as pictures rather than text (the title logo, signs, some menu labels), so it isn't in the script.
+
+## How sure the readings are
+
+Every character the script uses has a reading, so the extracted script has no gaps. 2,497 readings are confirmed by the words they form in context. The other 173, listed in `low-confidence.json`, are best guesses. Together they make up about 2% of the text:
+
+- sound words and interjections (a giggle spelled 嘻?嘻 is the most common), where context can't decide the spelling;
+- kana and bold Latin letters, mostly in the untranslated Japanese messages;
+- about 30 rare characters whose few uses don't settle them (e.g. the festival 松?节).
+
+The surest way to settle one is to see its message on screen (`tools/savestate.py`). Corrections are welcome.
+
+## Not yet covered
+
+- The shorter text tables (menus, item and villager names) in files 1885–1899. They use the same encoding.
+- Chinese drawn as pictures (the title logo, signs, some menu labels).
 
 ## How the table was made
 
