@@ -16,7 +16,7 @@ It writes `script.txt`: all 11,791 messages by number, in Chinese, with the game
 
 - `extract.py` — the extractor.
 - `chars.json` — character code → character, for all 2,670 characters the script uses.
-- `low-confidence.json` — the 378 readings in `chars.json` that are less certain: kana (likely leftovers from the Japanese original), bold Latin letters and digits, and characters the font holds twice in near-identical forms.
+- `low-confidence.json` — the readings in `chars.json` that are less certain: kana (likely leftovers from the Japanese original), bold Latin letters and digits, and characters the font holds twice in near-identical forms.
 - `tools/` — what the table was made with (Python 3 and Pillow):
   - `sheets.py <rom>` draws the characters `chars.json` lacks, most frequent first, as numbered sheets of the game's own glyphs.
   - `apply_sheet.py <n> <readings.txt>` stores one sheet's readings.
