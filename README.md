@@ -42,9 +42,9 @@ It writes `script.txt`: all 11,791 messages by number, in Chinese, with the game
 
 ## How sure the readings are
 
-Every character the script, its answers, letters and villager names use has a reading (2,809 in all), so the extracted text has no gaps. All but six are confirmed by the words they form in context. A second pass over the 173 that were once best guesses (sound words, kana and Latin letters from the untranslated Japanese messages, rare characters) corrected 21 of them, among them 罐 in 空罐子 and 逵 in 李逵. A blank glyph read as □ is now a full-width space.
+Every character the script, its answers, letters, villager names and string table use has a reading (2,906 in all), so the extracted text has no gaps. All are confirmed by the words they form in context. A second pass over the 173 that were once best guesses (sound words, kana and Latin letters from the untranslated Japanese messages, rare characters) corrected 21 of them, among them 罐 in 空罐子 and 逵 in 李逵. A blank glyph read as □ is now a full-width space.
 
-The six still in `low-confidence.json` appear only in villager names and catchphrases, so no sentence settles them. The surest way to settle one is to see it on screen (`tools/savestate.py`). Corrections are welcome.
+The last six best guesses, found only in villager names and catchphrases, were checked pixel by pixel against the candidates and kept, so `low-confidence.json` is now empty. Corrections are welcome (`tools/savestate.py` shows a glyph on screen).
 
 ## Not yet covered
 
