@@ -16,7 +16,7 @@ It writes `script.txt`: all 11,791 messages by number, in Chinese, with the game
 
 - `extract.py` — the extractor.
 - `chars.json` — character code → character, for all 2,670 characters the script uses.
-- `low-confidence.json` — the 173 readings in `chars.json` that are best guesses (see below).
+- `low-confidence.json` — the readings in `chars.json` that are still best guesses (see below).
 - `tools/` — what the table was made with (Python 3 and Pillow):
   - `sheets.py <rom>` draws the characters `chars.json` lacks, most frequent first, as numbered sheets of the game's own glyphs.
   - `apply_sheet.py <n> <readings.txt>` stores one sheet's readings.
@@ -42,17 +42,13 @@ It writes `script.txt`: all 11,791 messages by number, in Chinese, with the game
 
 ## How sure the readings are
 
-Every character the script uses has a reading, so the extracted script has no gaps. 2,497 readings are confirmed by the words they form in context. The other 173, listed in `low-confidence.json`, are best guesses. Together they make up about 2% of the text:
+Every character the script, its answers, letters and villager names use has a reading (2,809 in all), so the extracted text has no gaps. All but two are confirmed by the words they form in context. A second pass over the 173 that were once best guesses (sound words, kana and Latin letters from the untranslated Japanese messages, rare characters) corrected 21 of them, among them 罐 in 空罐子 and 逵 in 李逵. A blank glyph read as □ is now a full-width space.
 
-- sound words and interjections (a giggle spelled 嘻?嘻 is the most common), where context can't decide the spelling;
-- kana and bold Latin letters, mostly in the untranslated Japanese messages;
-- about 30 rare characters whose few uses don't settle them (e.g. the festival 松?节).
-
-The surest way to settle one is to see its message on screen (`tools/savestate.py`). Corrections are welcome.
+The two still in `low-confidence.json` appear only in villager names, so no sentence settles them. The surest way to settle one is to see it on screen (`tools/savestate.py`). Corrections are welcome.
 
 ## Not yet covered
 
-- The shorter text tables (menus, item and villager names) in files 1885–1899. They use the same encoding.
+- The short string table (times, items, menu words), file 1893 with its index 1894, in the same encoding. The others are found: choice answers (1885/1886), letters (bodies 1887/1888, greetings 1889/1890, sign-offs 1891/1892, each indexed by end offsets from 0) and villager names (1914: an 8-byte header, then 6 bytes per name).
 - Chinese drawn as pictures (the title logo, signs, some menu labels).
 
 ## How the table was made
