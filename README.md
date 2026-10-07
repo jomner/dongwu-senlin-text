@@ -15,7 +15,7 @@ It writes `script.txt`: all 11,791 messages by number, in Chinese, with the game
 ## Files
 
 - `extract.py` — the extractor.
-- `chars.json` — character code → character, for all 2,670 characters the script uses.
+- `chars.json` — character code → character, for all 3,007 characters the game's text uses (the script, its answers, letters, villager names, the string table and item names).
 - `low-confidence.json` — the readings in `chars.json` that are still best guesses (see below).
 - `tools/` — what the table was made with (Python 3 and Pillow):
   - `sheets.py <rom>` draws the characters `chars.json` lacks, most frequent first, as numbered sheets of the game's own glyphs.
@@ -27,6 +27,11 @@ It writes `script.txt`: all 11,791 messages by number, in Chinese, with the game
 
 - **Files.** The file table is at ROM `0x21D80` (16 bytes per file: VROM start/end, ROM start/end, as in Ocarina of Time). Compressed files are raw DEFLATE, not Yaz0 as on the N64.
 - **Messages.** File 1883 is the message data; file 1884 indexes it, as big-endian 32-bit end offsets.
+- **The rest of the text,** in the same encoding: choice answers (1885/1886), letters (bodies 1887/1888, greetings
+  1889/1890, sign-offs 1891/1892), the short string table (1893/1894: names, words, catchphrases), each indexed by
+  end offsets from 0; villager names (1914: an 8-byte header, then 6 bytes per name); item names (2225: an 8-byte
+  header, then 10 bytes per name, padded with spaces, in the N64's item tables). `extract.py` writes the messages
+  only.
 - **Characters.**
   - `7D` — new line.
   - `7F xx …` — control code `xx`, followed by its arguments. Sizes and meanings match the GameCube Animal Crossing's control codes (`mFont_cont_info_tbl` in ac-decomp); every message parses to its exact end with them.
@@ -42,13 +47,12 @@ It writes `script.txt`: all 11,791 messages by number, in Chinese, with the game
 
 ## How sure the readings are
 
-Every character the script, its answers, letters, villager names and string table use has a reading (3,007 in all), so the extracted text has no gaps. All are confirmed by the words they form in context. A second pass over the 173 that were once best guesses (sound words, kana and Latin letters from the untranslated Japanese messages, rare characters) corrected 21 of them, among them 罐 in 空罐子 and 逵 in 李逵. A blank glyph read as □ is now a full-width space.
+Every character the script, its answers, letters, villager names, string table and item names use has a reading (3,007 in all), so the extracted text has no gaps. All are confirmed by the words they form in context. A second pass over the 173 that were once best guesses (sound words, kana and Latin letters from the untranslated Japanese messages, rare characters) corrected 21 of them, among them 罐 in 空罐子 and 逵 in 李逵. A blank glyph read as □ is now a full-width space.
 
 The last six best guesses, found only in villager names and catchphrases, were checked pixel by pixel against the candidates and kept, so `low-confidence.json` is now empty. Corrections are welcome (`tools/savestate.py` shows a glyph on screen).
 
 ## Not yet covered
 
-- The short string table (times, items, menu words), file 1893 with its index 1894, in the same encoding. The others are found: choice answers (1885/1886), letters (bodies 1887/1888, greetings 1889/1890, sign-offs 1891/1892, each indexed by end offsets from 0) and villager names (1914: an 8-byte header, then 6 bytes per name).
 - Chinese drawn as pictures (the title logo, signs, some menu labels).
 
 ## How the table was made
