@@ -1,5 +1,10 @@
 # Game data never goes in this repository
 script.txt
+answers.txt
+letters.txt
+names.txt
+strings.txt
+items.txt
 glyphs-used.txt
 *.z64
 *.n64
